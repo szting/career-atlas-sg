@@ -145,11 +145,6 @@ st.markdown("""
         font-weight: 500;
     }
     
-    /* Sidebar Styles */
-    .sidebar .sidebar-content {
-        background: linear-gradient(180deg, #f0fdfa 0%, #ffffff 100%);
-    }
-    
     /* Hide Streamlit Branding */
     #MainMenu {visibility: hidden;}
     footer {visibility: hidden;}
@@ -169,6 +164,19 @@ st.markdown("""
     .stButton > button:hover {
         transform: translateY(-2px);
         box-shadow: 0 4px 12px rgba(20, 184, 166, 0.4);
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .header-title {
+            font-size: 2rem;
+        }
+        .feature-card {
+            padding: 1.5rem;
+        }
+        .stats-card {
+            padding: 1.5rem;
+        }
     }
 </style>
 """, unsafe_allow_html=True)
@@ -228,7 +236,6 @@ INDUSTRY_TRENDS = {
 
 def simulate_rag_search(query):
     """Simulate RAG-based search results"""
-    # In production, this would call your RAG system
     results = []
     query_lower = query.lower()
     
