@@ -1,0 +1,83 @@
+# RAG Configuration File
+
+# Embedding Model Settings
+embedding:
+  model_name: "all-MiniLM-L6-v2"  # Lightweight and efficient
+  # Alternative models:
+  # - "all-mpnet-base-v2" (higher quality, slower)
+  # - "multi-qa-MiniLM-L6-cos-v1" (optimized for Q&A)
+  batch_size: 32
+  max_seq_length: 512
+
+# Vector Database Settings
+vector_db:
+  type: "chromadb"  # or "faiss", "pinecone", "weaviate"
+  persist_directory: "./data/chroma_db"
+  collection_names:
+    job_roles: "sg_job_roles"
+    skills: "sg_skills"
+    career_paths: "sg_career_paths"
+
+# LLM Settings
+llm:
+  provider: "openai"  # or "anthropic", "cohere", "huggingface"
+  model: "gpt-3.5-turbo"
+  temperature: 0.7
+  max_tokens: 500
+  top_p: 0.9
+  frequency_penalty: 0.0
+  presence_penalty: 0.0
+
+# Retrieval Settings
+retrieval:
+  top_k: 10
+  rerank_top_k: 5
+  hybrid_search:
+    enabled: true
+    semantic_weight: 0.7
+    keyword_weight: 0.3
+  filters:
+    min_relevance_score: 0.5
+
+# Query Processing
+query_processing:
+  intent_classification:
+    enabled: true
+    confidence_threshold: 0.7
+  entity_extraction:
+    enabled: true
+    models:
+      - "spacy"
+      - "custom_ner"
+
+# Response Generation
+response:
+  max_context_length: 2000
+  include_sources: true
+  include_confidence: true
+  format: "markdown"
+  
+# Performance Settings
+performance:
+  cache:
+    enabled: true
+    ttl: 3600  # 1 hour
+    max_size: 1000
+  batch_processing:
+    enabled: true
+    batch_size: 10
+  async_processing:
+    enabled: true
+    max_workers: 4
+
+# Monitoring
+monitoring:
+  metrics:
+    enabled: true
+    port: 9090
+  logging:
+    level: "INFO"
+    format: "json"
+  tracing:
+    enabled: false
+    service_name: "sg-career-atlas-rag"
